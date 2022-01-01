@@ -4,7 +4,7 @@ function loadData() {
     $("#slTableContainer").show();
     $("#slTable").show();
     $("#slScoreboard").show();
-    $("#slInfo").show();
+    $("#slInfo").css("display", "flex").css("flex-direction", "column").show();
     clearInfo();
     clearScoreboard();
     $("tr.songData").remove();
@@ -309,7 +309,7 @@ function updateInfo(song) {
             let innerHTML = "";
             innerHTML += (host === "catbox" ? "Catbox " : (host === "animethemes" ? "AnimeThemes " : "OpeningsMoe "));
             innerHTML += (resolution === "0") ? "MP3: " : (resolution === "480") ? "480p: " : "720p: ";
-            innerHTML += "<a href=\"" + url + "\" target=\"_blank\">" + url + "</a>";
+            innerHTML += "<a href=\"" + url + "\" class=\"slInfoSongLink\">" + url + "</a>";
             infoListContainer.append($("<li></li>")
                 .html(innerHTML)
             );
@@ -321,6 +321,23 @@ function updateInfo(song) {
     $("#slInfoBody").append(infoRow2);
     $("#slInfoBody").append(infoRow3);
     $("#slInfoBody").append(infoRow4);
+
+    $("#slPlayerContainer").hide();
+    $(".slInfoSongLink").on("click", function(evt) {
+        evt.preventDefault();
+        setVideo($(this).attr('href'), true);
+    });
+}
+
+function setVideo(url, autoplay) {
+    let vjs = videojs.getPlayer("slPlayer");
+    vjs.src(url);
+    if (autoplay) {
+        vjs.ready(function() {
+            vjs.play();
+        });
+    }
+    $("#slPlayerContainer").show();
 }
 
 function clearInfo() {

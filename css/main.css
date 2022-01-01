@@ -299,7 +299,7 @@ tr.header > td {
     margin-left: 10px;
 }
 #slInfoBody {
-    height: calc(100vh - 268px);
+    flex-grow: 1;
     overflow-y: auto;
     overflow-x: auto;
 }
@@ -377,4 +377,8 @@ tr.header > td {
 #slInfoFromList {
     width: 48%;
     float: left;
+}
+#slPlayerContainer {
+    width: 100%;
+    display: none;
 }

@@ -68,5 +68,5 @@ function setup() {
             }
             reader.readAsText(file);
         }
-    })
+    });
 }
